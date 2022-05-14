@@ -66,7 +66,7 @@
             <div class="column is-12">
                 <div class="signup-type">
                     <div class="box-wrap">
-                        <input type="radio" wire:model="plan_type" value="0" checked>
+                        <input type="radio" wire:model.defer="plan_type" value="0" checked>
                         <div class="signup-box">
                             <i class="lnil lnil-coffee-cup"></i>
                             <div class="meta">
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="box-wrap">
-                        <input type="radio" wire:model="plan_type" value="1">
+                        <input type="radio" wire:model.defer="plan_type" value="1">
                         <div class="signup-box">
                             <i class="lnil lnil-crown-alt-1"></i>
                             <div class="meta">

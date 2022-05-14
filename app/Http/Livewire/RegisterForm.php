@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
+use Livewire\Livewire;
 
 class RegisterForm extends Component
 {
@@ -10,9 +12,6 @@ class RegisterForm extends Component
     public $last_name;
     public $email;
     public $plan_type;
-
-
-    protected $listeners = ['signupStep1' => 'signupStep1'];
 
 
     protected $rules = [
@@ -31,7 +30,17 @@ class RegisterForm extends Component
 
     public function submit() {
         if ($this->validate()) {
+
             $this->dispatchBrowserEvent('readyToNextStep');
+
+            $this->emitTo('register-complete-profile', "RegisterStep1Complete" , [
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'email' => $this->email,
+                'plan_type' => $this->plan_type,
+            ]);
+
+
         }
     }
 
