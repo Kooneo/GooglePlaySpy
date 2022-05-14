@@ -55,8 +55,6 @@
             <div class="hero is-fullheight">
                 <div class="hero-body">
                     <div class="container">
-                        <form id="signup-form" class="signup-form is-mobile-spaced" action="{{ route('register') }}" method="POST">
-                            @csrf
                         <!-- Step 1 -->
                         <div id="signup-step-1" class="columns signup-columns">
                             <div class="column is-4 is-offset-1">
@@ -64,97 +62,11 @@
                                 <h2 id="main-signup-subtitle" class="subtitle signup-subtitle">And simply join an unmatched
                                     design experience.</h2>
                                 <div class="signup-card">
-                                    
-                                        <div class="columns is-multiline">
-                                            <div class="column is-6">
-                                                <div class="control has-validation">
-                                                    <input type="text" class="input" name="first_name" required value="{{ old('first_name') }}">
-                                                    <small class="error-text">This is a required field</small>
-                                                    <div class="auth-label">First Name</div>
-                                                    <div class="validation-icon is-success">
-                                                        <div class="icon-wrapper">
-                                                            <i data-feather="check"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="validation-icon is-error">
-                                                        <div class="icon-wrapper">
-                                                            <i data-feather="x"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="column is-6">
-                                                <div class="control has-validation">
-                                                    <input type="text" class="input" name="last_name" required value="{{ old('last_name') }}">
-                                                    <small class="error-text">This is a required field</small>
-                                                    <div class="auth-label">Last Name</div>
-                                                    <div class="validation-icon is-success">
-                                                        <div class="icon-wrapper">
-                                                            <i data-feather="check"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="validation-icon is-error">
-                                                        <div class="icon-wrapper">
-                                                            <i data-feather="x"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="column is-12">
-                                                <div class="control has-validation">
-                                                    <input type="text" class="input" value="{{ old('email') }}">
-                                                    <small class="error-text">This is a required field</small>
-                                                    <div class="auth-label">Email Address</div>
-                                                    <div class="validation-icon is-success">
-                                                        <div class="icon-wrapper">
-                                                            <i data-feather="check"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="validation-icon is-error">
-                                                        <div class="icon-wrapper">
-                                                            <i data-feather="x"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="column is-12">
-                                                <div class="signup-type">
-                                                    <div class="box-wrap">
-                                                        <input type="radio" name="plan_type" value="{{ \App\Models\User::PLAN_FREE }}" checked>
-                                                        <div class="signup-box">
-                                                            <i class="lnil lnil-coffee-cup"></i>
-                                                            <div class="meta">
-                                                                <span>Free</span>
-                                                                <span>Nice to get started</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="box-wrap">
-                                                        <input type="radio" name="plan_type" value="{{ \App\Models\User::PLAN_PRO }}">
-                                                        <div class="signup-box">
-                                                            <i class="lnil lnil-crown-alt-1"></i>
-                                                            <div class="meta">
-                                                                <span>Paid</span>
-                                                                <span>Get a lot more features</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="control is-agree">
-                                                <span>By continuing you agree to our <a href="#">Terms</a> and <a
-                                                        href="#">Privacy</a></span>
-                                        </div>
-
-                                        <div class="button-wrap has-help">
-                                            <button id="confirm-step-1" type="button" class="button h-button is-big is-rounded is-primary is-bold is-fullwidth">Continue</button>
-                                            <span>Or <a href="{{ route('login') }}">Sign In</a> to your account.</span>
-                                        </div>
+                                    <livewire:register-form />
                                 </div>
                             </div>
                         </div>
+
 
                         <!-- Step 2 -->
                         <div id="signup-step-2" class="columns signup-columns is-hidden">
@@ -165,7 +77,7 @@
                                     </h2>
                                     <div class="picture-selector">
                                         <div class="image-container">
-                                            <img src="{{ asset('assets/img/avatars/svg/huro-1.svg') }}" alt="">
+                                            <img src="assets/img/avatars/svg/huro-1.svg" alt="">
                                             <div class="upload-button modal-trigger" role="button" data-modal="upload-modal">
                                                 <i data-feather="plus"></i>
                                             </div>
@@ -257,7 +169,7 @@
                                     <div class="columns is-multiline">
                                         <div class="column is-12">
                                             <div class="control has-validation">
-                                                <input type="text" class="input" name="username" required value="{{ old('username') }}">
+                                                <input type="text" class="input">
                                                 <small class="error-text">This is a required field</small>
                                                 <div class="auth-label">Username</div>
                                                 <div class="validation-icon is-success">
@@ -274,7 +186,7 @@
                                         </div>
                                         <div class="column is-12">
                                             <div class="control has-validation">
-                                                <input type="password" class="input" name="password" required>
+                                                <input type="text" class="input">
                                                 <small class="error-text">This is a required field</small>
                                                 <div class="auth-label">Password</div>
                                                 <div class="validation-icon is-success">
@@ -291,7 +203,7 @@
                                         </div>
                                         <div class="column is-12">
                                             <div class="control has-validation">
-                                                <input type="password" class="input" name="password_confirmation" required>
+                                                <input type="text" class="input">
                                                 <small class="error-text">This is a required field</small>
                                                 <div class="auth-label">Confirm Password</div>
                                                 <div class="validation-icon is-success">
@@ -323,7 +235,7 @@
                                 </form>
                             </div>
                         </div>
-                    </form>
+
                     </div>
                 </div>
             </div>
@@ -358,7 +270,6 @@
             </div>
         </div>
         <!-- upload modal -->
-    </div>
 @endsection
 
 

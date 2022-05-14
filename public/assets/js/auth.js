@@ -1,10 +1,12 @@
-/*! components.js | Huro | Css Ninja. 2020-2021 */
+
 "use strict";
 initPageLoader(), $(document).ready((function () {
-    if ("development" === env && changeDemoImages(), feather.replace(), initDarkMode(), initAnimatedModals(), $("#login-submit").on("click", (function () {
+    if ("development" === env && changeDemoImages(), feather.replace(), initDarkMode(), initAnimatedModals(),
+        $("#login-submit").on("click", (function () {
         var i = $(this);
         i.addClass("is-loading"), setTimeout((function () {
-            i.removeClass("is-loading"), $("#login-form").submit()
+            i.removeClass("is-loading"),
+            $("#login-form").submit()
         }), 1e3)
     })), $("#forgot-link, #cancel-recover").on("click", (function () {
         $(this).closest(".is-form").find("form, .form-text").toggleClass("is-hidden")
@@ -12,12 +14,25 @@ initPageLoader(), $(document).ready((function () {
         if ($(".step-icon").on("click", (function () {
             var i = $(this).attr("data-step"), e = $(this).attr("data-progress");
             $(this).prevAll().addClass("is-done"), $(this).removeClass("is-done").addClass("is-active"), $(this).nextAll().removeClass("is-active is-done"), $("#signup-steps-progress").val(e), void 0 !== i && ($(".signup-columns").addClass("is-hidden"), $("#" + i).removeClass("is-hidden"), $(".avatar-carousel").slick("setPosition"), $(".card-bg").addClass("faded")), "signup-step-1" == i && $(".card-bg").removeClass("faded")
-        })), $("#confirm-step-1").on("click", (function () {
-            var i = $(this);
-            i.addClass("is-loading"), setTimeout((function () {
-                i.removeClass("is-loading"), $(".card-bg").addClass("faded"), $(".signup-steps").removeClass("is-hidden"), $("#signup-step-1, #signup-step-2").toggleClass("is-hidden"), $(".avatar-carousel").slick("setPosition")
-            }), 1e3)
-        })), $(".avatar-carousel").length) {
+        })),
+
+                // Listen for validation complete and jump to next step
+                $("#confirm-step-1").on("click", (function () {
+                    var i = $(this);
+                    i.addClass("is-loading"),
+                    window.addEventListener("readyToNextStep", function (e) {
+                        setTimeout((function () {
+                            i.removeClass("is-loading"),
+                                $(".card-bg").addClass("faded"),
+                                $(".signup-steps").removeClass("is-hidden"),
+                                $("#signup-step-1, #signup-step-2").toggleClass("is-hidden"),
+                                $(".avatar-carousel").slick("setPosition")
+                        }), 1e3)
+                    });
+
+                })),
+
+            $(".avatar-carousel").length) {
             var i = $(".avatar-carousel");
             i.on("init", (function () {
                 feather.replace()
@@ -38,7 +53,8 @@ initPageLoader(), $(document).ready((function () {
                 $(".slick-slider").slick("slickCurrentSlide") !== e && $(".slick-slider").slick("slickGoTo", e)
             }))
         }
-        FilePond.registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation, FilePondPluginFileValidateSize, FilePondPluginImageEdit), FilePond.create(document.querySelector(".signup-filepond"), {
+        FilePond.registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation, FilePondPluginFileValidateSize, FilePondPluginImageEdit), FilePond.create(
+            document.querySelector(".signup-filepond"), {
             labelIdle: '<i class="lnil lnil-cloud-upload"></>',
             imagePreviewHeight: 140,
             imageCropAspectRatio: "1:1",
@@ -56,11 +72,13 @@ initPageLoader(), $(document).ready((function () {
             i.addClass("is-loading"), setTimeout((function () {
                 i.removeClass("is-loading"), $(".step-icon:nth-child(2)").removeClass("is-inactive").trigger("click")
             }), 1e3)
-        })), $("#finish-signup").on("click", (function () {
+        })),
+
+        $("#finish-signup").on("click", (function () {
             var i = $(this);
             i.addClass("is-loading"), $(".step-icon.is-inactive").removeClass("is-inactive").trigger("click"), setTimeout((function () {
                 i.removeClass("is-loading")
-                ,  $("#signup-form").submit()
+                // ,  $("#signup-form").submit()
                     // , window.location.href = "/admin/dashboard"
             }), 1400)
         }))

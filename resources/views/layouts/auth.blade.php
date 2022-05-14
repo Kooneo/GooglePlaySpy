@@ -18,21 +18,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 
+    @livewireStyles
 </head>
 
 <body>
     <div id="huro-app" class="app-wrapper">
         @yield("content")
 
-
-        <!--Huro Scripts-->
-        <!-- Concatenated plugins -->
-        <script src="{{ asset('assets/js/app.js') }}"></script>
-
-        <!-- Huro js -->
-        <script src="{{ asset('assets/js/functions.js') }}"></script>
-        <script src="{{ asset('assets/js/auth.js') }}"></script>
     </div>
+
+    @livewireScripts
+
+    <!--Huro Scripts-->
+    <!-- Concatenated plugins -->
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+
+    <!-- Huro js -->
+    <script src="{{ asset('assets/js/functions.js') }}"></script>
+    <script src="{{ asset('assets/js/auth.js') }}"></script>
+
 </body>
 
 </html>
