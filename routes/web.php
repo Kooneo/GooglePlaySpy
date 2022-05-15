@@ -14,11 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.home');
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('frontend.dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/top', function () {
+    return view('frontend.top-app');
+})->middleware(['auth'])->name('top-apps');
+
 
 require __DIR__.'/auth.php';

@@ -22,10 +22,20 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('plan_type')->default(\App\Models\User::PLAN_FREE);
-
+            $table->tinyInteger('role')->default(\App\Models\User::USER_ROLE);
             $table->rememberToken();
             $table->timestamps();
         });
+
+        \App\Models\User::query()->create([
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'username' => 'admin',
+            'password' => bcrypt('password'),
+            'plan_type' => \App\Models\User::PLAN_PRO,
+            'role' => \App\Models\User::ADMIN_ROLE,
+        ]);
     }
 
     /**

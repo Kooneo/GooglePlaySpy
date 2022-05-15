@@ -6,10 +6,11 @@
 {{--            @endforeach--}}
 {{--        @endif--}}
 
+{{--   TODO: Show validation Errors     --}}
         <div class="columns is-multiline">
             <div class="column is-6">
                 <div class="control has-validation">
-                    <input type="text" class="input" wire:model="first_name" >
+                    <input type="text" class="input" wire:model.defer="first_name" >
                     @error('first_name')
                         <span class="error-text">{{ $message }}</span>
 
@@ -31,7 +32,7 @@
             </div>
             <div class="column is-6">
                 <div class="control has-validation">
-                    <input type="text" class="input" wire:model="last_name">
+                    <input type="text" class="input" wire:model.defer="last_name">
                     <small class="error-text">This is a required field</small>
                     <div class="auth-label">Last Name</div>
                     <div class="validation-icon is-success">
@@ -48,7 +49,7 @@
             </div>
             <div class="column is-12">
                 <div class="control has-validation">
-                    <input type="email" class="input"  wire:model="email">
+                    <input type="email" class="input"  wire:model.defer="email">
                     <small class="error-text">This is a required field</small>
                     <div class="auth-label">Email Address</div>
                     <div class="validation-icon is-success">
@@ -66,7 +67,7 @@
             <div class="column is-12">
                 <div class="signup-type">
                     <div class="box-wrap">
-                        <input type="radio" wire:model.defer="plan_type" value="0" checked>
+                        <input type="radio" wire:model.defer="plan_type" value="0">
                         <div class="signup-box">
                             <i class="lnil lnil-coffee-cup"></i>
                             <div class="meta">

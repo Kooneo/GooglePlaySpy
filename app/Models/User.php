@@ -15,6 +15,10 @@ class User extends Authenticatable
     public const PLAN_FREE = 1;
     public const PLAN_PRO = 2;
 
+    public const ADMIN_ROLE = 0;
+    public const USER_ROLE = 1;
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +32,7 @@ class User extends Authenticatable
         'email',
         'password',
         'plan_type',
+        'role',
     ];
 
     /**
