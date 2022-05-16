@@ -1,0 +1,105 @@
+
+                                <div class="columns is-multiline">
+
+                                    @foreach($appslist as $app)
+                                        <!--Credit Cards-->
+                                        <div class="column is-2">
+                                            <div class="dashboard-card is-credit-cards">
+                                                <div class="title-wrap py-2 mb-0 mt-3">
+                                                    <a class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden">{{ $app->getName() }}</a>
+                                                </div>
+
+                                                <div class="card-block">
+                                                    <div class="card-block-inner is-dark-bordered-12 py-1 ">
+                                                        <div class="h-avatar is-large">
+                                                            <img src="{{ $app->getIcon() }}" class="avatar is-squared" style="width: 100%;height: 100%;">
+                                                            <img class="badge" src="https://via.placeholder.com/150x150" data-demo-src="assets/img/icons/stacks/illustrator.svg" alt="">
+                                                        </div>
+
+{{--                                                        <div class="h-avatar is-large">--}}
+{{--                                                            <img class="avatar is-squared"  src="{{ $app->getIcon() }}" data-demo-src="assets/img/photo/demo/apps/1.jpg" alt="">--}}
+{{--                                                        </div>--}}
+                                                        <div class="credit-card-end">
+                                                            <!--Dropdown-->
+                                                            <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
+                                                                <div class="is-trigger" aria-haspopup="true">
+                                                                    <i data-feather="more-vertical"></i>
+                                                                </div>
+                                                                <div class="dropdown-menu" role="menu">
+                                                                    <div class="dropdown-content">
+                                                                        <a href="#" class="dropdown-item is-media">
+                                                                            <div class="icon">
+                                                                                <i class="lnil lnil-coins"></i>
+                                                                            </div>
+                                                                            <div class="meta">
+                                                                                <span>Invest</span>
+                                                                                <span>Buy more stocks</span>
+                                                                            </div>
+                                                                        </a>
+                                                                        <a href="#" class="dropdown-item is-media">
+                                                                            <div class="icon">
+                                                                                <i class="lnil lnil-dollar-up"></i>
+                                                                            </div>
+                                                                            <div class="meta">
+                                                                                <span>Compare</span>
+                                                                                <span>Compare with others</span>
+                                                                            </div>
+                                                                        </a>
+                                                                        <a href="#" class="dropdown-item is-media">
+                                                                            <div class="icon">
+                                                                                <i class="lnil lnil-bank"></i>
+                                                                            </div>
+                                                                            <div class="meta">
+                                                                                <span>Trade</span>
+                                                                                <span>View opportunities</span>
+                                                                            </div>
+                                                                        </a>
+                                                                        <hr class="dropdown-divider">
+                                                                        <a href="#" class="dropdown-item is-media">
+                                                                            <div class="icon">
+                                                                                <i class="lnil lnil-wallet-alt-1"></i>
+                                                                            </div>
+                                                                            <div class="meta">
+                                                                                <span>Wallet</span>
+                                                                                <span>Open stock wallet</span>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-block-inner py-1">
+                                                        <div class="title-wrap">
+    {{--                                                        <h3 class="dark-inverted" style="white-space: nowrap; overflow: hidden" >Linerock Investm</h3>--}}
+                                                            <a href="{{ $app->getDeveloper()->getUrl() }}" target="_blank" class="action-link">{{ $app->getDeveloper()->getName() }}</a>
+                                                        </div>
+                                                        <div class="info-block-line my-0 py-0">
+{{--                                                            <span style="font-weight: 400" >{{ $app->getCategory()->getName() }}</span>--}}
+                                                        </div>
+                                                        <div class="info-block-line py-0">
+                                                            <h4 class="dark-inverted">Installs</h4>
+                                                            <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>1M</span>
+                                                        </div>
+                                                        <div class="info-block-line py-0">
+                                                            <h4 class="dark-inverted">Release</h4>
+                                                            <span  style="font-weight: 600">134 days</span>
+                                                        </div>
+                                                        <div class="info-block-line  py-0">
+                                                            <h4 class="dark-inverted">iap ads</h4>
+                                                            <span class="dark-inverted" style="font-weight: bold">4.6</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+------------------------------------------
+
+<div class="card-grid-item">
+    <div class="h-avatar is-large">
+        <img class="avatar is-squared" src="https://via.placeholder.com/150x150" data-demo-src="assets/img/photo/demo/apps/1.jpg" alt="">
+        <img class="badge" src="https://via.placeholder.com/150x150" data-demo-src="assets/img/icons/stacks/illustrator.svg" alt="">
+    </div>
+</div>

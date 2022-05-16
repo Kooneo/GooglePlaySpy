@@ -1,0 +1,17 @@
+.page-content-wrapper-full{
+    width:100%;
+    /*max-width:1200px;*/
+    margin:0 auto;
+}
+
+
+@media screen and (min-width: 769px), print {
+    .app-item-card {
+        width: 10% !important;
+    }
+}
+@media only screen and (max-width: 769px) {
+    .app-item-card {
+        width: 100% !important;
+    }
+}

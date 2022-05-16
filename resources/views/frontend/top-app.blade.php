@@ -13,12 +13,14 @@
     <!--Core CSS -->
     <link rel="stylesheet" href="assets/css/app.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/main2.css" />
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" rel="stylesheet" />
 
     <!--Mapbox styles-->
+    @livewireStyles
 </head>
 
 <body>
@@ -2886,711 +2888,83 @@
                     </div>
                 </div>
 
-                <div class="page-content-inner ">
+                <div class="page-content-inner is-full">
+                    <div class="card-grid-toolbar">
+                        <div class="control has-icon">
+                            <input class="input custom-text-filter" placeholder="Search..." data-filter-target=".column">
+                            <div class="form-icon">
+                                <i data-feather="search"></i>
+                            </div>
+                        </div>
 
-                    <!--Banking Dashboard V1-->
-                    <div class="banking-dashboard banking-dashboard-v1">
-
-                        <div class="columns is-multiline">
-
-
-
-
-                            <div class="column is-12">
-
-                                <div class="columns is-multiline">
-                                    <!--Credit Cards-->
-                                    <div class="column is-2">
-                                        <div class="dashboard-card is-credit-cards">
-                                            <div class="title-wrap py-2 mb-0 mt-3">
-                                                <a class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden">NewProfilePic: Profile Picture</a>
-                                            </div>
-
-                                            <div class="card-block">
-                                                <div class="card-block-inner is-dark-bordered-12 py-1 ">
-
-                                                    <img src="https://lh3.googleusercontent.com/I-Yd5tJnxw7Ks8FUhUiFr8I4kohd9phv5sRFHG_-nSX9AAD6Rcy570NBZVFJBKpepmc=h140" class="" style="width: 100%;height: 100%;border-radius: 10px">
-
-                                                    <div class="credit-card-end">
-                                                        <!--Dropdown-->
-                                                        <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
-                                                            <div class="is-trigger" aria-haspopup="true">
-                                                                <i data-feather="more-vertical"></i>
-                                                            </div>
-                                                            <div class="dropdown-menu" role="menu">
-                                                                <div class="dropdown-content">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-coins"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Invest</span>
-                                                                            <span>Buy more stocks</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-dollar-up"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Compare</span>
-                                                                            <span>Compare with others</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-bank"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Trade</span>
-                                                                            <span>View opportunities</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <hr class="dropdown-divider">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-wallet-alt-1"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Wallet</span>
-                                                                            <span>Open stock wallet</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="info-block-inner py-1">
-                                                    <div class="title-wrap">
-{{--                                                        <h3 class="dark-inverted" style="white-space: nowrap; overflow: hidden" >Linerock Investm</h3>--}}
-                                                        <a class="action-link">Linerock Investm</a>
-                                                    </div>
-                                                    <div class="info-block-line my-0 py-0">
-                                                        <span style="font-weight: 400" >PHOTOGRAPHY</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Installs</h4>
-                                                        <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>1M</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Release</h4>
-                                                        <span  style="font-weight: 600">134 days</span>
-                                                    </div>
-                                                    <div class="info-block-line  py-0">
-                                                        <h4 class="dark-inverted">iap ads</h4>
-                                                        <span class="dark-inverted" style="font-weight: bold">4.6</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                        <div class="buttons">
+                            <div class="field h-hidden-mobile">
+                                <div class="control">
+                                    <div class="h-select">
+                                        <div class="select-box">
+                                            <span>Filter</span>
                                         </div>
-                                    </div>
-
-                                    <!--Credit Cards-->
-                                    <div class="column is-2">
-                                        <div class="dashboard-card is-credit-cards">
-                                            <div class="title-wrap py-2 mb-0 mt-3">
-                                                <a class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden">Dislyte</a>
-                                            </div>
-
-                                            <div class="card-block">
-                                                <div class="card-block-inner is-dark-bordered-12 py-1 ">
-
-                                                    <img src="https://lh3.googleusercontent.com/n3n3GKO33RCgwmZCd_D2HwnIELqJ0K7zbClIn3l7QDtPuJMBdfStpf_WBgL5FXq0iY2T=h140" class="" style="width: 100%;height: 100%;border-radius: 10px">
-
-                                                    <div class="credit-card-end">
-                                                        <!--Dropdown-->
-                                                        <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
-                                                            <div class="is-trigger" aria-haspopup="true">
-                                                                <i data-feather="more-vertical"></i>
-                                                            </div>
-                                                            <div class="dropdown-menu" role="menu">
-                                                                <div class="dropdown-content">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-coins"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Invest</span>
-                                                                            <span>Buy more stocks</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-dollar-up"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Compare</span>
-                                                                            <span>Compare with others</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-bank"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Trade</span>
-                                                                            <span>View opportunities</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <hr class="dropdown-divider">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-wallet-alt-1"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Wallet</span>
-                                                                            <span>Open stock wallet</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="info-block-inner py-1">
-                                                    <div class="title-wrap">
-{{--                                                        <h3 class="dark-inverted" style="white-space: nowrap; overflow: hidden" >Linerock Investm</h3>--}}
-                                                        <a class="action-link">LilithGames</a>
-                                                    </div>
-                                                    <div class="info-block-line my-0 py-0">
-                                                        <span style="font-weight: 400" >ROLE PLAYING</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Installs</h4>
-                                                        <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>1M</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Release</h4>
-                                                        <span  style="font-weight: 600">1y</span>
-                                                    </div>
-                                                    <div class="info-block-line  py-0">
-                                                        <h4 class="dark-inverted">iap ads</h4>
-                                                        <span class="dark-inverted" style="font-weight: bold">4.6</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="select-icon">
+                                            <i data-feather="chevron-down"></i>
                                         </div>
-                                    </div>
-
-
-                                    <!--Credit Cards-->
-                                    <div class="column is-2">
-                                        <div class="dashboard-card is-credit-cards">
-                                            <div class="title-wrap py-2 mb-0 mt-3">
-                                                <a class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden">NewProfilePic: Profile Picture</a>
-                                            </div>
-
-                                            <div class="card-block">
-                                                <div class="card-block-inner is-dark-bordered-12 py-1 ">
-
-                                                    <img src="https://lh3.googleusercontent.com/I-Yd5tJnxw7Ks8FUhUiFr8I4kohd9phv5sRFHG_-nSX9AAD6Rcy570NBZVFJBKpepmc=h140" class="" style="width: 100%;height: 100%;border-radius: 10px">
-
-                                                    <div class="credit-card-end">
-                                                        <!--Dropdown-->
-                                                        <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
-                                                            <div class="is-trigger" aria-haspopup="true">
-                                                                <i data-feather="more-vertical"></i>
-                                                            </div>
-                                                            <div class="dropdown-menu" role="menu">
-                                                                <div class="dropdown-content">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-coins"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Invest</span>
-                                                                            <span>Buy more stocks</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-dollar-up"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Compare</span>
-                                                                            <span>Compare with others</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-bank"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Trade</span>
-                                                                            <span>View opportunities</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <hr class="dropdown-divider">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-wallet-alt-1"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Wallet</span>
-                                                                            <span>Open stock wallet</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
+                                        <div class="select-drop has-slimscroll-sm">
+                                            <div class="drop-inner">
+                                                @foreach($categories as $category)
+                                                    <div class="option-row">
+                                                        <input type="radio" name="grid_filter">
+                                                        <div class="option-meta">
+                                                            <span>{{ $category->getName() }}</span>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="info-block-inner py-1">
-                                                    <div class="title-wrap">
-                                                        {{--                                                        <h3 class="dark-inverted" style="white-space: nowrap; overflow: hidden" >Linerock Investm</h3>--}}
-                                                        <a class="action-link">Linerock Investm</a>
-                                                    </div>
-                                                    <div class="info-block-line my-0 py-0">
-                                                        <span style="font-weight: 400" >PHOTOGRAPHY</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Installs</h4>
-                                                        <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>1M</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Release</h4>
-                                                        <span  style="font-weight: 600">134 days</span>
-                                                    </div>
-                                                    <div class="info-block-line  py-0">
-                                                        <h4 class="dark-inverted">iap ads</h4>
-                                                        <span class="dark-inverted" style="font-weight: bold">4.6</span>
+                                                @endforeach
+
+                                                <div class="option-row">
+                                                    <input type="radio" name="grid_filter">
+                                                    <div class="option-meta">
+                                                        <span>Web Development</span>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--Credit Cards-->
-                                    <div class="column is-2">
-                                        <div class="dashboard-card is-credit-cards">
-                                            <div class="title-wrap py-2 mb-0 mt-3">
-                                                <a class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden">Dislyte</a>
-                                            </div>
-
-                                            <div class="card-block">
-                                                <div class="card-block-inner is-dark-bordered-12 py-1 ">
-
-                                                    <img src="https://lh3.googleusercontent.com/n3n3GKO33RCgwmZCd_D2HwnIELqJ0K7zbClIn3l7QDtPuJMBdfStpf_WBgL5FXq0iY2T=h140" class="" style="width: 100%;height: 100%;border-radius: 10px">
-
-                                                    <div class="credit-card-end">
-                                                        <!--Dropdown-->
-                                                        <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
-                                                            <div class="is-trigger" aria-haspopup="true">
-                                                                <i data-feather="more-vertical"></i>
-                                                            </div>
-                                                            <div class="dropdown-menu" role="menu">
-                                                                <div class="dropdown-content">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-coins"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Invest</span>
-                                                                            <span>Buy more stocks</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-dollar-up"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Compare</span>
-                                                                            <span>Compare with others</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-bank"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Trade</span>
-                                                                            <span>View opportunities</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <hr class="dropdown-divider">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-wallet-alt-1"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Wallet</span>
-                                                                            <span>Open stock wallet</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="info-block-inner py-1">
-                                                    <div class="title-wrap">
-                                                        {{--                                                        <h3 class="dark-inverted" style="white-space: nowrap; overflow: hidden" >Linerock Investm</h3>--}}
-                                                        <a class="action-link">LilithGames</a>
-                                                    </div>
-                                                    <div class="info-block-line my-0 py-0">
-                                                        <span style="font-weight: 400" >ROLE PLAYING</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Installs</h4>
-                                                        <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>1M</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Release</h4>
-                                                        <span  style="font-weight: 600">1y</span>
-                                                    </div>
-                                                    <div class="info-block-line  py-0">
-                                                        <h4 class="dark-inverted">iap ads</h4>
-                                                        <span class="dark-inverted" style="font-weight: bold">4.6</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><!--Credit Cards-->
-                                    <div class="column is-2">
-                                        <div class="dashboard-card is-credit-cards">
-                                            <div class="title-wrap py-2 mb-0 mt-3">
-                                                <a class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden">Dislyte</a>
-                                            </div>
-
-                                            <div class="card-block">
-                                                <div class="card-block-inner is-dark-bordered-12 py-1 ">
-
-                                                    <img src="https://lh3.googleusercontent.com/n3n3GKO33RCgwmZCd_D2HwnIELqJ0K7zbClIn3l7QDtPuJMBdfStpf_WBgL5FXq0iY2T=h140" class="" style="width: 100%;height: 100%;border-radius: 10px">
-
-                                                    <div class="credit-card-end">
-                                                        <!--Dropdown-->
-                                                        <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
-                                                            <div class="is-trigger" aria-haspopup="true">
-                                                                <i data-feather="more-vertical"></i>
-                                                            </div>
-                                                            <div class="dropdown-menu" role="menu">
-                                                                <div class="dropdown-content">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-coins"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Invest</span>
-                                                                            <span>Buy more stocks</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-dollar-up"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Compare</span>
-                                                                            <span>Compare with others</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-bank"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Trade</span>
-                                                                            <span>View opportunities</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <hr class="dropdown-divider">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-wallet-alt-1"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Wallet</span>
-                                                                            <span>Open stock wallet</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="info-block-inner py-1">
-                                                    <div class="title-wrap">
-                                                        {{--                                                        <h3 class="dark-inverted" style="white-space: nowrap; overflow: hidden" >Linerock Investm</h3>--}}
-                                                        <a class="action-link">LilithGames</a>
-                                                    </div>
-                                                    <div class="info-block-line my-0 py-0">
-                                                        <span style="font-weight: 400" >ROLE PLAYING</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Installs</h4>
-                                                        <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>1M</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Release</h4>
-                                                        <span  style="font-weight: 600">1y</span>
-                                                    </div>
-                                                    <div class="info-block-line  py-0">
-                                                        <h4 class="dark-inverted">iap ads</h4>
-                                                        <span class="dark-inverted" style="font-weight: bold">4.6</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><!--Credit Cards-->
-                                    <div class="column is-2">
-                                        <div class="dashboard-card is-credit-cards">
-                                            <div class="title-wrap py-2 mb-0 mt-3">
-                                                <a class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden">Dislyte</a>
-                                            </div>
-
-                                            <div class="card-block">
-                                                <div class="card-block-inner is-dark-bordered-12 py-1 ">
-
-                                                    <img src="https://lh3.googleusercontent.com/n3n3GKO33RCgwmZCd_D2HwnIELqJ0K7zbClIn3l7QDtPuJMBdfStpf_WBgL5FXq0iY2T=h140" class="" style="width: 100%;height: 100%;border-radius: 10px">
-
-                                                    <div class="credit-card-end">
-                                                        <!--Dropdown-->
-                                                        <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
-                                                            <div class="is-trigger" aria-haspopup="true">
-                                                                <i data-feather="more-vertical"></i>
-                                                            </div>
-                                                            <div class="dropdown-menu" role="menu">
-                                                                <div class="dropdown-content">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-coins"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Invest</span>
-                                                                            <span>Buy more stocks</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-dollar-up"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Compare</span>
-                                                                            <span>Compare with others</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-bank"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Trade</span>
-                                                                            <span>View opportunities</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <hr class="dropdown-divider">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-wallet-alt-1"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Wallet</span>
-                                                                            <span>Open stock wallet</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="info-block-inner py-1">
-                                                    <div class="title-wrap">
-                                                        {{--                                                        <h3 class="dark-inverted" style="white-space: nowrap; overflow: hidden" >Linerock Investm</h3>--}}
-                                                        <a class="action-link">LilithGames</a>
-                                                    </div>
-                                                    <div class="info-block-line my-0 py-0">
-                                                        <span style="font-weight: 400" >ROLE PLAYING</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Installs</h4>
-                                                        <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>1M</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Release</h4>
-                                                        <span  style="font-weight: 600">1y</span>
-                                                    </div>
-                                                    <div class="info-block-line  py-0">
-                                                        <h4 class="dark-inverted">iap ads</h4>
-                                                        <span class="dark-inverted" style="font-weight: bold">4.6</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><!--Credit Cards-->
-                                    <div class="column is-2">
-                                        <div class="dashboard-card is-credit-cards">
-                                            <div class="title-wrap py-2 mb-0 mt-3">
-                                                <a class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden">Dislyte</a>
-                                            </div>
-
-                                            <div class="card-block">
-                                                <div class="card-block-inner is-dark-bordered-12 py-1 ">
-
-                                                    <img src="https://lh3.googleusercontent.com/n3n3GKO33RCgwmZCd_D2HwnIELqJ0K7zbClIn3l7QDtPuJMBdfStpf_WBgL5FXq0iY2T=h140" class="" style="width: 100%;height: 100%;border-radius: 10px">
-
-                                                    <div class="credit-card-end">
-                                                        <!--Dropdown-->
-                                                        <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
-                                                            <div class="is-trigger" aria-haspopup="true">
-                                                                <i data-feather="more-vertical"></i>
-                                                            </div>
-                                                            <div class="dropdown-menu" role="menu">
-                                                                <div class="dropdown-content">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-coins"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Invest</span>
-                                                                            <span>Buy more stocks</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-dollar-up"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Compare</span>
-                                                                            <span>Compare with others</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-bank"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Trade</span>
-                                                                            <span>View opportunities</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <hr class="dropdown-divider">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-wallet-alt-1"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Wallet</span>
-                                                                            <span>Open stock wallet</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="info-block-inner py-1">
-                                                    <div class="title-wrap">
-                                                        {{--                                                        <h3 class="dark-inverted" style="white-space: nowrap; overflow: hidden" >Linerock Investm</h3>--}}
-                                                        <a class="action-link">LilithGames</a>
-                                                    </div>
-                                                    <div class="info-block-line my-0 py-0">
-                                                        <span style="font-weight: 400" >ROLE PLAYING</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Installs</h4>
-                                                        <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>1M</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Release</h4>
-                                                        <span  style="font-weight: 600">1y</span>
-                                                    </div>
-                                                    <div class="info-block-line  py-0">
-                                                        <h4 class="dark-inverted">iap ads</h4>
-                                                        <span class="dark-inverted" style="font-weight: bold">4.6</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><!--Credit Cards-->
-                                    <div class="column is-2">
-                                        <div class="dashboard-card is-credit-cards">
-                                            <div class="title-wrap py-2 mb-0 mt-3">
-                                                <a class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden">Dislyte</a>
-                                            </div>
-
-                                            <div class="card-block">
-                                                <div class="card-block-inner is-dark-bordered-12 py-1 ">
-
-                                                    <img src="https://lh3.googleusercontent.com/n3n3GKO33RCgwmZCd_D2HwnIELqJ0K7zbClIn3l7QDtPuJMBdfStpf_WBgL5FXq0iY2T=h140" class="" style="width: 100%;height: 100%;border-radius: 10px">
-
-                                                    <div class="credit-card-end">
-                                                        <!--Dropdown-->
-                                                        <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
-                                                            <div class="is-trigger" aria-haspopup="true">
-                                                                <i data-feather="more-vertical"></i>
-                                                            </div>
-                                                            <div class="dropdown-menu" role="menu">
-                                                                <div class="dropdown-content">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-coins"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Invest</span>
-                                                                            <span>Buy more stocks</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-dollar-up"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Compare</span>
-                                                                            <span>Compare with others</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-bank"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Trade</span>
-                                                                            <span>View opportunities</span>
-                                                                        </div>
-                                                                    </a>
-                                                                    <hr class="dropdown-divider">
-                                                                    <a href="#" class="dropdown-item is-media">
-                                                                        <div class="icon">
-                                                                            <i class="lnil lnil-wallet-alt-1"></i>
-                                                                        </div>
-                                                                        <div class="meta">
-                                                                            <span>Wallet</span>
-                                                                            <span>Open stock wallet</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="info-block-inner py-1">
-                                                    <div class="title-wrap">
-                                                        {{--                                                        <h3 class="dark-inverted" style="white-space: nowrap; overflow: hidden" >Linerock Investm</h3>--}}
-                                                        <a class="action-link">LilithGames</a>
-                                                    </div>
-                                                    <div class="info-block-line my-0 py-0">
-                                                        <span style="font-weight: 400" >ROLE PLAYING</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Installs</h4>
-                                                        <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>1M</span>
-                                                    </div>
-                                                    <div class="info-block-line py-0">
-                                                        <h4 class="dark-inverted">Release</h4>
-                                                        <span  style="font-weight: 600">1y</span>
-                                                    </div>
-                                                    <div class="info-block-line  py-0">
-                                                        <h4 class="dark-inverted">iap ads</h4>
-                                                        <span class="dark-inverted" style="font-weight: bold">4.6</span>
+                                                <div class="option-row">
+                                                    <input type="radio" name="grid_filter">
+                                                    <div class="option-meta">
+                                                        <span>Software Engineering</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+                            <button class="button h-button is-primary is-raised">
+                                <span class="icon">
+                                  <i aria-hidden="true" class="fas fa-plus"></i>
+                              </span>
+                                <span>Add User</span>
+                            </button>
                         </div>
+                    </div>
+
+                    <!--Banking Dashboard V1-->
+                    <div class="banking-dashboard banking-dashboard-v1 ">
+
+                        <div class="columns is-multiline">
+
+                            <!--List Empty Search Placeholder -->
+                            <div class="page-placeholder custom-text-filter-placeholder is-hidden">
+                                <div class="placeholder-content">
+                                    <img class="light-image" src="assets/img/illustrations/placeholders/search-3.svg" alt="" />
+                                    <img class="dark-image" src="assets/img/illustrations/placeholders/search-3-dark.svg" alt="" />
+                                    <h3>We couldn't find any matching results.</h3>
+                                    <p class="is-larger">Too bad. Looks like we couldn't find any matching results for the
+                                        search terms you've entered. Please try different search terms or criteria.</p>
+                                </div>
+                            </div>
+                            <div class="column is-12">
+                                <livewire:app-list-result/>
+                            </div>
+{{--                        here--}}
+                        </div>
+
 
                     </div>
                 </div>
@@ -3601,6 +2975,7 @@
 
     <!--Huro Scripts-->
     <!--Load Mapbox-->
+    @livewireScripts
 
     <!-- Concatenated plugins -->
     <script src="assets/js/app.js"></script>
