@@ -19,8 +19,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" rel="stylesheet" />
 
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
     <!--Mapbox styles-->
-    @livewireStyles
+{{--    @livewireStyles--}}
 </head>
 
 <body>
@@ -2959,9 +2963,162 @@
                                         search terms you've entered. Please try different search terms or criteria.</p>
                                 </div>
                             </div>
-                            <div class="column is-12">
-                                <livewire:app-list-result/>
+                            <div class="column is-12" >
+{{--                                <livewire:app-list-result/>--}}
+                                <div class="columns is-multilin" id="apps" style="display: flex;flex-wrap: wrap;" >
+
+                                    @foreach($appslist as $app)
+                                        <!--Credit Cards-->
+                                            {{--        {{ dd($app) }}--}}
+                                            <div class="column is-2 app-item-card" >
+                                                <div class="dashboard-card is-credit-cards">
+                                                    <div class="title-wrap py-2 mb-0 mt-3">
+                                                        <a href="" target="_blank" class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden" data-filter-match>{{ is_array( $app ) ? $app['name'] :  $app->getName() }}</a>
+                                                    </div>
+
+                                                    <div class="card-block">
+                                                        <div class="card-block-inner is-dark-bordered-12 py-1 ">
+                                                            <div class="h-avatar is-large" style="width: 100%;max-width: inherit">
+                                                                <a href="{{ is_array( $app ) ? $app['url'] : $app->getUrl() }}" target="_blank">
+                                                                    <img src="{{ is_array( $app ) ? $app['icon'] :  $app->getIcon() }}" class="avatar is-squared" style="width: 100%;height: 100%">
+                                                                </a>
+                                                                <img class="badge" src="https://via.placeholder.com/150x150" data-demo-src="assets/img/icons/stacks/illustrator.svg" alt="">
+                                                            </div>
+
+                                                            {{--                                                        <div class="h-avatar is-large">--}}
+                                                            {{--                                                            <img class="avatar is-squared"  src="{{ $app->getIcon() }}" data-demo-src="assets/img/photo/demo/apps/1.jpg" alt="">--}}
+                                                            {{--                                                        </div>--}}
+                                                            <div class="credit-card-end">
+                                                                <!--Dropdown-->
+                                                                <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
+                                                                    <div class="is-trigger" aria-haspopup="true">
+                                                                        <i data-feather="more-vertical"></i>
+                                                                    </div>
+                                                                    <div class="dropdown-menu" role="menu">
+                                                                        <div class="dropdown-content">
+                                                                            <a href="#" class="dropdown-item is-media">
+                                                                                <div class="icon">
+                                                                                    <i class="lnil lnil-coins"></i>
+                                                                                </div>
+                                                                                <div class="meta">
+                                                                                    <span>Invest</span>
+                                                                                    <span>Buy more stocks</span>
+                                                                                </div>
+                                                                            </a>
+                                                                            <a href="#" class="dropdown-item is-media">
+                                                                                <div class="icon">
+                                                                                    <i class="lnil lnil-dollar-up"></i>
+                                                                                </div>
+                                                                                <div class="meta">
+                                                                                    <span>Compare</span>
+                                                                                    <span>Compare with others</span>
+                                                                                </div>
+                                                                            </a>
+                                                                            <a href="#" class="dropdown-item is-media">
+                                                                                <div class="icon">
+                                                                                    <i class="lnil lnil-bank"></i>
+                                                                                </div>
+                                                                                <div class="meta">
+                                                                                    <span>Trade</span>
+                                                                                    <span>View opportunities</span>
+                                                                                </div>
+                                                                            </a>
+                                                                            <hr class="dropdown-divider">
+                                                                            <a href="{{ is_array( $app ) ? $app['url'] :  $app->getUrl()  }}" target="_blank" class="dropdown-item is-media">
+                                                                                <div class="icon">
+                                                                                    <i class="lnil lnil-wallet-alt-1"></i>
+                                                                                </div>
+                                                                                <div class="meta">
+                                                                                    <span>Google Play</span>
+                                                                                    <span>Open on App Store </span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="info-block-inner py-1">
+                                                            <div class="title-wrap">
+                                                                {{--                                                        <h3 class="dark-inverted" style="white-space: nowrap; overflow: hidden" >Linerock Investm</h3>--}}
+                                                                {{--                                    <span class="" style="color: #283252 !important;">Dev: </span>--}}
+
+                                                                <div class="info-block-line py-0">
+                                                                    <h4 class="dark-inverted"> </h4>
+                                                                </div>
+                                                                <a href="{{ is_array( $app ) ? $app['developer']['url'] : $app->getDeveloper()->getUrl() }}" target="_blank" class="action-link">
+                                                                    {{ is_array( $app ) ? $app['developer']['name'] :  $app->getDeveloper()->getName() }}
+                                                                </a>
+                                                            </div>
+                                                            <div class="info-block-line my-0 py-0">
+                                                                <span style="font-weight: 400" >{{ is_array( $app ) ?$app['category']['name'] :  $app->getCategory()->getName() }}</span>
+                                                            </div>
+                                                            <div class="info-block-line py-0">
+                                                                <h4 class="dark-inverted">Installs</h4>
+                                                                @if($app->getInstalls() > 1000000000)
+                                                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app->getInstalls()/1000000) }} B</span>
+                                                                @elseif($app->getInstalls() > 1000000)
+                                                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app->getInstalls()/1000) }} M</span>
+                                                                @elseif($app->getInstalls() > 1000)
+                                                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app->getInstalls()/1000) }} K</span>
+                                                                @else
+                                                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ $app->getInstalls() }}</span>
+                                                                @endif
+                                                                {{--                                                            <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ ($app->getInstalls() > 1000) ? }}</span>--}}
+                                                            </div>
+                                                            <div class="info-block-line py-0">
+                                                                <h4 class="dark-inverted">Release</h4>
+{{--                                                                @php--}}
+{{--                                                                /*--}}
+{{--                                                                    if (is_array($app)) {--}}
+{{--                                                                        $date = $app['released'];--}}
+{{--                                                                    } else {--}}
+{{--                                                                        $date = $app->getReleased()->date;--}}
+{{--                                                                    }--}}
+{{--                                                                */--}}
+{{--                                                                $date = $app->getReleased()->date;--}}
+{{--                                                                    $relasedate = \Illuminate\Support\Carbon::createFromTimeString($date)->diffForHumans();--}}
+{{--                                                                    $arrdate = explode(' ',$relasedate);--}}
+{{--                                                                    $value = $arrdate[0];--}}
+{{--                                                                    $short = $arrdate[1];--}}
+{{--                                                                    $code = $short[0];--}}
+{{--                                                                @endphp--}}
+{{--                                                                                                <span  style="font-weight: 600">{{ $value. " " . $code }}</span>--}}
+                                                            </div>
+                                                            <div class="info-block-line  py-0">
+                                                                <h4 class="dark-inverted">iap ads</h4>
+                                                                <span class="dark-inverted" style="font-weight: bold">4.6</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    @endforeach
+
+
+{{--                                    <!--Infinite Loader-->--}}
+{{--                                        <div class="infinite-scroll-loader" data-filter-hide>--}}
+{{--                                            <div class="infinite-scroll-loader-inner">--}}
+{{--                                                <div class="loader is-loading"></div>--}}
+{{--                                                <div class="loader-end is-hidden">--}}
+{{--                                                    <span>No more items to load</span>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+
+                                </div>
+
+
+
                             </div>
+                                <div id="load_more">
+                                    <button class="button h-button is-primary is-raised">
+                                            <span class="icon">
+                                              <i aria-hidden="true" class="fas fa-truck-loading"></i>
+                                            </span>
+                                        <span>Load More...</span>
+                                    </button>
+                                </div>
 {{--                        here--}}
                         </div>
 
@@ -2973,9 +3130,146 @@
         </div>
     </div>
 
+
+
+    <script>
+        $(document).ready(function () {
+               let _token = '{{ csrf_token() }}';
+                var ofset = 0;
+               // on click call load more function
+                $('#load_more').click(function () {
+                     // $('#load_more').html('<span class="icon"><i aria-hidden="true" class="fas fa-truck-loading"></i></span><span>Loading...</span>');
+                    ofset += 1;
+                     $.ajax({
+                          url: '{{ route('ajax.loadmore.apps') }}',
+                          type: 'POST',
+                          data: {
+                              _token: _token,
+                              ofset: ofset,
+                            // page: $('.pagination .active').next().find('a').attr('href')
+                          },
+                          success: function (data) {
+                              console.log(data);
+                              if (data) {
+                                  let apps = data.apps;
+                                  let html = '';
+                                  for (let i = 0; i < apps.length; i++) {
+                                      let app = apps[i];
+                                      html += '<div class="column is-2 app-item-card" >' +
+                                               ' <div class="dashboard-card is-credit-cards"> ' +
+                                                   '<div class="title-wrap py-2 mb-0 mt-3">' +
+                                                        '<a href="" target="_blank" class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden" data-filter-match>' + app.name +'</a>' +
+                                                    '</div>' +
+
+                                                    '<div class="card-block">' +
+                                                        '<div class="card-block-inner is-dark-bordered-12 py-1 ">' +
+                                                            '<div class="h-avatar is-large" style="width: 100%;max-width: inherit">' +
+                                                                '<a href="" target="_blank">' +
+                                                                    '<img src="'+ app.icon + '" class="avatar is-squared" style="width: 100%;height: 100%">' +
+                                                                '</a>' +
+                                                                '<img class="badge" src="https://via.placeholder.com/150x150" data-demo-src="assets/img/icons/stacks/illustrator.svg" alt="">' +
+                                                            '</div>' +
+
+                                                            '<div class="credit-card-end">' +
+                                                                '<div class="dropdown is-spaced is-dots is-right dropdown-trigger">' +
+                                                                    '<div class="is-trigger" aria-haspopup="true">' +
+                                                                        '<i data-feather="more-vertical"></i>' +
+                                                                    '</div>' +
+                                                                    '<div class="dropdown-menu" role="menu">' +
+                                                                        '<div class="dropdown-content">' +
+                                                                            '<a href="#" class="dropdown-item is-media">' +
+                                                                                '<div class="icon">' +
+                                                                                    '<i class="lnil lnil-coins"></i>' +
+                                                                                '</div>' +
+                                                                                '<div class="meta">' +
+                                                                                    '<span>Invest</span>' +
+                                                                                    '<span>Buy more stocks</span>' +
+                                                                                '</div>' +
+                                                                            '</a>' +
+                                                                            '<a href="#" class="dropdown-item is-media">' +
+                                                                                '<div class="icon">' +
+                                                                                    '<i class="lnil lnil-dollar-up"></i>' +
+                                                                                '</div>' +
+                                                                                '<div class="meta">' +
+                                                                                    '<span>Compare</span>' +
+                                                                                    '<span>Compare with others</span>' +
+                                                                                '</div>' +
+                                                                            '</a>' +
+                                                                            '<a href="#" class="dropdown-item is-media">' +
+                                                                                '<div class="icon">' +
+                                                                                    '<i class="lnil lnil-bank"></i>' +
+                                                                                '</div>' +
+                                                                                '<div class="meta">' +
+                                                                                    '<span>Trade</span>' +
+                                                                                    '<span>View opportunities</span>' +
+                                                                                '</div>' +
+                                                                            '</a>' +
+                                                                            '<hr class="dropdown-divider">' +
+                                                                            '<a href="" target="_blank" class="dropdown-item is-media">' +
+                                                                                '<div class="icon">' +
+                                                                                    '<i class="lnil lnil-wallet-alt-1"></i>' +
+                                                                                '</div>' +
+                                                                                '<div class="meta">' +
+                                                                                    '<span>Google Play</span>' +
+                                                                                    '<span>Open on App Store </span>' +
+                                                                                '</div>' +
+                                                                            '</a>' +
+                                                                        '</div>' +
+                                                                    '</div>' +
+                                                                '</div>' +
+                                                            '</div>' +
+                                                        '</div>' +
+                                                        '<div class="info-block-inner py-1">' +
+                                                            '<div class="title-wrap">' +
+
+                                                                '<div class="info-block-line py-0">' +
+                                                                    '<h4 class="dark-inverted"> </h4>' +
+                                                                '</div>' +
+                                                                '<a href="" target="_blank" class="action-link">devname</a>' +
+                                                            '</div>' +
+                                                            '<div class="info-block-line my-0 py-0"> ' +
+                                                                '<span style="font-weight: 400" >get name</span>' +
+                                                            '</div>'+
+                                                            '<div class="info-block-line py-0">' +
+                                                                '<h4 class="dark-inverted">Installs</h4>' +
+                                                                '<span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>1 B</span>' +
+                                                            '</div>' +
+                                                            '<div class="info-block-line py-0">' +
+                                                                '<h4 class="dark-inverted">Release</h4>' +
+
+                                                                '<span  style="font-weight: 600">1y </span>' +
+                                                            '</div>' +
+                                                            '<div class="info-block-line  py-0">' +
+                                                                '<h4 class="dark-inverted">iap ads</h4>' +
+                                                                '<span class="dark-inverted" style="font-weight: bold">4.6</span>' +
+                                                            '</div>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                            '</div>';
+
+                                    }
+
+                                  $('#apps').append(html);
+                                  // $('#load_more').html('<button class="button h-button is-primary is-raised"><span class="icon"><i aria-hidden="true" class="fas fa-truck-loading"></i></span><span>Load More...</span></button>');
+                                  // $('.pagination').html(data);
+                            } else {
+                                 $('#load_more').html('<button class="button h-button is-primary is-raised"><span class="icon"><i aria-hidden="true" class="fas fa-truck-loading"></i></span><span>No More Data...</span></button>');
+                            }
+                          }
+                     });
+                });
+
+
+
+        });
+    </script>
+
+
+
     <!--Huro Scripts-->
     <!--Load Mapbox-->
-    @livewireScripts
+{{--    @livewireScripts--}}
 
     <!-- Concatenated plugins -->
     <script src="assets/js/app.js"></script>
@@ -3021,8 +3315,6 @@
     <!--Wizard-->
 
     <!-- Layouts js -->
-
-
 
 
 

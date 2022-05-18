@@ -3,17 +3,18 @@
 
     @foreach($appslist as $app)
         <!--Credit Cards-->
+{{--        {{ dd($app) }}--}}
             <div class="column is-2 app-item-card">
                 <div class="dashboard-card is-credit-cards">
                     <div class="title-wrap py-2 mb-0 mt-3">
-                        <a href="{{ $app->getUrl() }}" target="_blank" class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden" data-filter-match>{{ $app->getName() }}</a>
+                        <a href="" target="_blank" class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden" data-filter-match>{{ is_array( $app ) ? $app['name'] :  $app->getName() }}</a>
                     </div>
 
                     <div class="card-block">
                         <div class="card-block-inner is-dark-bordered-12 py-1 ">
                             <div class="h-avatar is-large" style="width: 100%;max-width: inherit">
-                                <a href="{{ $app->getUrl() }}" target="_blank">
-                                    <img src="{{ $app->getIcon() }}" class="avatar is-squared" style="width: 100%;height: 100%">
+                                <a href="{{ is_array( $app ) ? $app['url'] : $app->getUrl() }}" target="_blank">
+                                    <img src="{{ is_array( $app ) ? $app['icon'] :  $app->getIcon() }}" class="avatar is-squared" style="width: 100%;height: 100%">
                                 </a>
                                 <img class="badge" src="https://via.placeholder.com/150x150" data-demo-src="assets/img/icons/stacks/illustrator.svg" alt="">
                             </div>
@@ -57,7 +58,7 @@
                                                 </div>
                                             </a>
                                             <hr class="dropdown-divider">
-                                            <a href="{{ $app->getUrl()  }}" target="_blank" class="dropdown-item is-media">
+                                            <a href="{{ is_array( $app ) ? $app['url'] :  $app->getUrl()  }}" target="_blank" class="dropdown-item is-media">
                                                 <div class="icon">
                                                     <i class="lnil lnil-wallet-alt-1"></i>
                                                 </div>
@@ -79,36 +80,36 @@
                                 <div class="info-block-line py-0">
                                     <h4 class="dark-inverted"> </h4>
                                 </div>
-                                <a href="{{ $app->getDeveloper()->getUrl() }}" target="_blank" class="action-link">
-                                    {{ $app->getDeveloper()->getName() }}
+                                <a href="{{ is_array( $app ) ? $app['developer']['url'] : $app->getDeveloper()->getUrl() }}" target="_blank" class="action-link">
+                                    {{ is_array( $app ) ? $app['developer']['name'] :  $app->getDeveloper()->getName() }}
                                 </a>
                             </div>
                             <div class="info-block-line my-0 py-0">
-                                <span style="font-weight: 400" >{{ $app->getCategory()->getName() }}</span>
+                                <span style="font-weight: 400" >{{ is_array( $app ) ?$app['category']['name'] :  $app->getCategory()->getName() }}</span>
                             </div>
                             <div class="info-block-line py-0">
                                 <h4 class="dark-inverted">Installs</h4>
-                                @if($app->getInstalls() > 1000000000)
-                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app->getInstalls()/1000000) }} B</span>
-                                @elseif($app->getInstalls() > 1000000)
-                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app->getInstalls()/1000) }} M</span>
-                                @elseif($app->getInstalls() > 1000)
-                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app->getInstalls()/1000) }} K</span>
-                                @else
-                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ $app->getInstalls() }}</span>
-                                @endif
+{{--                                @if($app->getInstalls() > 1000000000)--}}
+{{--                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app->getInstalls()/1000000) }} B</span>--}}
+{{--                                @elseif($app->getInstalls() > 1000000)--}}
+{{--                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app->getInstalls()/1000) }} M</span>--}}
+{{--                                @elseif($app->getInstalls() > 1000)--}}
+{{--                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app->getInstalls()/1000) }} K</span>--}}
+{{--                                @else--}}
+{{--                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ $app->getInstalls() }}</span>--}}
+{{--                                @endif--}}
                                 {{--                                                            <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ ($app->getInstalls() > 1000) ? }}</span>--}}
                             </div>
                             <div class="info-block-line py-0">
                                 <h4 class="dark-inverted">Release</h4>
-                                @php
-                                    $relasedate = \Illuminate\Support\Carbon::make($app->getReleased()->date)->diffForHumans();
-                                    $arrdate = explode(' ',$relasedate,);
-                                    $value = $arrdate[0];
-                                    $short = $arrdate[1];
-                                    $code = $short[0];
-                                @endphp
-                                <span  style="font-weight: 600">{{ $value. " " . $code }}</span>
+{{--                                @php--}}
+{{--                                    $relasedate = \Illuminate\Support\Carbon::make($app->getReleased()->date)->diffForHumans();--}}
+{{--                                    $arrdate = explode(' ',$relasedate,);--}}
+{{--                                    $value = $arrdate[0];--}}
+{{--                                    $short = $arrdate[1];--}}
+{{--                                    $code = $short[0];--}}
+{{--                                @endphp--}}
+{{--                                <span  style="font-weight: 600">{{ $value. " " . $code }}</span>--}}
                             </div>
                             <div class="info-block-line  py-0">
                                 <h4 class="dark-inverted">iap ads</h4>
@@ -120,7 +121,7 @@
             </div>
     @endforeach
 
-    <button class="button h-button is-primary is-raised" wire:click="load()">
+    <button class="button h-button is-primary is-raised" wire:click.defer="load()">
         <span class="icon">
           <i aria-hidden="true" class="fas fa-truck-loading"></i>
         </span>

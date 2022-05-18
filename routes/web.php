@@ -23,6 +23,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/top', [TopChartAppController::class, 'index'])->middleware(['auth'])->name('top-apps');
+Route::post('/load-more', [TopChartAppController::class, 'loadMoreApps'])->middleware(['auth'])->name('ajax.loadmore.apps');
 
 
 require __DIR__.'/auth.php';
