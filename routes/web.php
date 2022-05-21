@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TopChartAppController;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +26,9 @@ Route::get('/dashboard', function () {
 Route::get('/top', [TopChartAppController::class, 'index'])->middleware(['auth'])->name('top-apps');
 Route::post('/load-more', [TopChartAppController::class, 'loadMoreApps'])->middleware(['auth'])->name('ajax.loadmore.apps');
 
+Route::get('/playground', function () {
+
+    return Redis::get('categories');
+});
 
 require __DIR__.'/auth.php';

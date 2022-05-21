@@ -2917,7 +2917,7 @@
                                                     <div class="option-row">
                                                         <input type="radio" name="grid_filter">
                                                         <div class="option-meta">
-                                                            <span>{{ $category->getName() }}</span>
+                                                            <span>{{ is_array($category) ? $category["name"] : $category->getName()}}</span>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -2968,26 +2968,54 @@
                                 <div class="columns is-multilin" id="apps" style="display: flex;flex-wrap: wrap;" >
 
                                     @foreach($appslist as $app)
+                                        @php
+                                            if (is_array($app)) {
+                                               $date = $app['released'];
+                                            } else {
+                                               $date = $app->getReleased()->date;
+                                            }
+
+                                            $relasedate = \Illuminate\Support\Carbon::createFromTimeString($date);
+                                            $now = \Illuminate\Support\Carbon::now();
+                                            // check if less than a week
+                                            $diff = $now->diffInDays($relasedate);
+                                            if ($diff > 356) {
+                                                // red
+                                                $style =  "background-color: #fda9a9;";
+                                            } elseif ($diff > 30) {
+                                                // yallow
+                                                $style =  "background-color:  #FEFF7F;";
+                                            } else{
+                                                // green
+                                                 $style = "background-color:#a8ff5c;";
+                                            }
+
+                                        @endphp
                                         <!--Credit Cards-->
-                                            {{--        {{ dd($app) }}--}}
-                                            <div class="column is-2 app-item-card" >
-                                                <div class="dashboard-card is-credit-cards">
-                                                    <div class="title-wrap py-2 mb-0 mt-3">
-                                                        <a href="" target="_blank" class="dark-inverted action-link" style="white-space: nowrap; overflow: hidden" data-filter-match>{{ is_array( $app ) ? $app['name'] :  $app->getName() }}</a>
+                                            <div class="column is-2 app-item-card "  >
+                                                <div class="dashboard-card is-credit-cards"  style="{{ $style }}" >
+                                                    <div class="title-wrap py-2 mb-0 mt-3 ">
+                                                        <div class="status-icon is-success" style="background: #06d6a0;border-color: #06d6a0;color: #fff;height: 28px;width: 28px;min-width: 28px;border-radius: 50%;border: 1px solid #e5e5e5;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;padding: 2px">
+{{--                                                            <i aria-hidden="true" class="fas fa-check"></i>--}}
+                                                            <span style="font-size: 1.1rem;font-weight: bold">{{ $loop->iteration }}</span>
+                                                        </div>
+                                                        <a href="{{ $app['url'] }}" target="_blank" style="text-align: center !important;font-weight: bold;font-size: 1rem;" class="dark-inverted action-link" data-target="webuiPopover14" data-filter-match>{{ is_array( $app ) ? $app['name'] :  $app->getName() }}</a>
+{{--                                                         style="white-space: nowrap; overflow: hidden"--}}
                                                     </div>
 
                                                     <div class="card-block">
                                                         <div class="card-block-inner is-dark-bordered-12 py-1 ">
                                                             <div class="h-avatar is-large" style="width: 100%;max-width: inherit">
-                                                                <a href="{{ is_array( $app ) ? $app['url'] : $app->getUrl() }}" target="_blank">
-                                                                    <img src="{{ is_array( $app ) ? $app['icon'] :  $app->getIcon() }}" class="avatar is-squared" style="width: 100%;height: 100%">
+                                                                <a href="{{ is_array( $app ) ? $app['url'] : $app->getUrl() }}" target="_blank" data-user-popover-screenshots-number="{{ count($app['screenshots']) }}" data-user-popover-screenshots="{{ is_array( $app ) ? $app['screenshots'][0] :  $app->getIcon() . '=s180' }}" data-target="webuiPopover{{ $loop->iteration }}">
+
+                                                                    <img src="{{ is_array( $app ) ? $app['icon'] . '=s180' :  $app->getIcon() . '=s180' }}" class="avatar is-squared" style="width: 100%;height: 100%">
                                                                 </a>
                                                                 <img class="badge" src="https://via.placeholder.com/150x150" data-demo-src="assets/img/icons/stacks/illustrator.svg" alt="">
                                                             </div>
 
-                                                            {{--                                                        <div class="h-avatar is-large">--}}
-                                                            {{--                                                            <img class="avatar is-squared"  src="{{ $app->getIcon() }}" data-demo-src="assets/img/photo/demo/apps/1.jpg" alt="">--}}
-                                                            {{--                                                        </div>--}}
+{{--                                                                                                                    <div class="h-avatar is-large">--}}
+{{--                                                                                                                        <img class="avatar is-squared"  src="{{ $app->getIcon() }}" data-demo-src="assets/img/photo/demo/apps/1.jpg" alt="">--}}
+{{--                                                                                                                    </div>--}}
                                                             <div class="credit-card-end">
                                                                 <!--Dropdown-->
                                                                 <div class="dropdown is-spaced is-dots is-right dropdown-trigger">
@@ -3038,56 +3066,110 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="info-block-inner py-1">
-                                                            <div class="title-wrap">
-                                                                {{--                                                        <h3 class="dark-inverted" style="white-space: nowrap; overflow: hidden" >Linerock Investm</h3>--}}
-                                                                {{--                                    <span class="" style="color: #283252 !important;">Dev: </span>--}}
+                                                        <div class="info-block-inner py-1"  data-user-popover-app-summary="{{ $app['summary'] }}" >
+                                                            <div class="title-wrap" style="margin-bottom: 0 !important;">
+{{--                                                                                                                        <h3 class="dark-inverted" style="white-space: nowrap; overflow: hidden" >Linerock Investm</h3>--}}
+{{--                                                                                                    <span class="" style="color: #283252 !important;">Dev: </span>--}}
 
                                                                 <div class="info-block-line py-0">
                                                                     <h4 class="dark-inverted"> </h4>
                                                                 </div>
-                                                                <a href="{{ is_array( $app ) ? $app['developer']['url'] : $app->getDeveloper()->getUrl() }}" target="_blank" class="action-link">
+                                                                <a style="white-space: nowrap; overflow: hidden" href="{{ is_array( $app ) ? $app['developer']['url'] : $app->getDeveloper()->getUrl() }}"  target="_blank" class="action-link" data-filter-match>
                                                                     {{ is_array( $app ) ? $app['developer']['name'] :  $app->getDeveloper()->getName() }}
                                                                 </a>
                                                             </div>
                                                             <div class="info-block-line my-0 py-0">
-                                                                <span style="font-weight: 400" >{{ is_array( $app ) ?$app['category']['name'] :  $app->getCategory()->getName() }}</span>
+                                                                <span style="color: #505156 !important;font-weight: bolder !important;text-transform: uppercase;" >{{ is_array( $app ) ?$app['category']['name'] :  $app->getCategory()->getName() }}</span>
                                                             </div>
                                                             <div class="info-block-line py-0">
-                                                                <h4 class="dark-inverted">Installs</h4>
-                                                                @if($app->getInstalls() > 1000000000)
-                                                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app->getInstalls()/1000000) }} B</span>
-                                                                @elseif($app->getInstalls() > 1000000)
-                                                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app->getInstalls()/1000) }} M</span>
-                                                                @elseif($app->getInstalls() > 1000)
-                                                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app->getInstalls()/1000) }} K</span>
+                                                                <h4 class="">Installs</h4>
+                                                                @if($app["installs"] > 1000000000)
+                                                                    <span class="is-dark-bordered-12" style="color: #283252 !important;font-weight: bold"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app["installs"]/1000000) }} B</span>
+                                                                @elseif($app["installs"] > 1000000)
+                                                                    <span class="is-dark-bordered-12" style="color: #283252 !important;font-weight: bold"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app["installs"]/1000) }} M</span>
+                                                                @elseif($app["installs"] > 1000)
+                                                                    <span class="is-dark-bordered-12" style="color: #283252 !important;font-weight: bold"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ number_format($app["installs"]/1000) }} K</span>
                                                                 @else
-                                                                    <span class="is-dark-bordered-12"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ $app->getInstalls() }}</span>
+                                                                    <span class="is-dark-bordered-12" style="color: #283252 !important;font-weight: bold"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ $app["installs"] }}</span>
                                                                 @endif
-                                                                {{--                                                            <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ ($app->getInstalls() > 1000) ? }}</span>--}}
+{{--                                                                                                                            <span  style="font-weight: 600"><i aria-hidden="true" class="fas fa-circle text-success"></i>{{ ($app->getInstalls() > 1000) ? }}</span>--}}
                                                             </div>
                                                             <div class="info-block-line py-0">
-                                                                <h4 class="dark-inverted">Release</h4>
-{{--                                                                @php--}}
-{{--                                                                /*--}}
-{{--                                                                    if (is_array($app)) {--}}
-{{--                                                                        $date = $app['released'];--}}
-{{--                                                                    } else {--}}
-{{--                                                                        $date = $app->getReleased()->date;--}}
-{{--                                                                    }--}}
-{{--                                                                */--}}
-{{--                                                                $date = $app->getReleased()->date;--}}
-{{--                                                                    $relasedate = \Illuminate\Support\Carbon::createFromTimeString($date)->diffForHumans();--}}
-{{--                                                                    $arrdate = explode(' ',$relasedate);--}}
-{{--                                                                    $value = $arrdate[0];--}}
-{{--                                                                    $short = $arrdate[1];--}}
-{{--                                                                    $code = $short[0];--}}
-{{--                                                                @endphp--}}
-{{--                                                                                                <span  style="font-weight: 600">{{ $value. " " . $code }}</span>--}}
+                                                                <h4 class="">Release</h4>
+                                                                @php
+
+                                                                    if (is_array($app)) {
+                                                                        $date = $app['released'];
+                                                                    } else {
+                                                                        $date = $app->getReleased()->date;
+                                                                    }
+                                                                    $relasedate = \Illuminate\Support\Carbon::createFromTimeString($date)->diffForHumans();
+/*
+                                                                    $arrdate = explode(' ',$relasedate);
+                                                                    $value = $arrdate[0];
+                                                                    $short = $arrdate[1];
+                                                                    $code = $short[0];
+*/
+                                                                @endphp
+                                                                <span style="color: #283252 !important;font-weight: bold">{{ $relasedate }}</span>
+                                                            </div>
+
+                                                            <div class="info-block-line py-0">
+                                                                <h4 class="">{!! $app["price"] == 0 ? '<i aria-hidden="true" class="fas fa-circle text-success"></i> Free' : '<i aria-hidden="true" class="fas fa-circle text-danger"></i> ' . "{$app["priceText"]}"  !!} </h4>
+                                                                <h4 class="">{!! $app["containsAds"] == true ? '<i aria-hidden="true" class="fas fa-circle text-success"></i> ' : '<i aria-hidden="true" class="fas fa-circle text-danger"></i> ' !!} Ads</h4>
+                                                            </div>
+
+                                                            @if($app["offersIAP"] )
+                                                                <div class="info-block-line py-0">
+                                                                    <h4 class=""><i aria-hidden="true" class="fas fa-circle text-success"></i> IAP</h4>
+{{--                                                                    @if($app["offersIAP"])--}}
+{{--                                                                        <span style="color: #283252 !important;font-weight: bold">{{ $app['offersIAPCost'] }}</span>--}}
+{{--                                                                    @endif--}}
+                                                                </div>
+                                                            @endif
+                                                            <div class="info-block-line py-0">
+                                                                <h4 class="">Updated </h4>
+                                                                @php
+
+                                                                    if (is_array($app)) {
+                                                                        $date = $app['updated'];
+                                                                    } else {
+                                                                        $date = $app->getUpdated()->date;
+                                                                    }
+                                                                    $updatedDate = \Illuminate\Support\Carbon::createFromTimeString($date)->diffForHumans();
+                                                                    //$arrdate = explode(' ',$relasedate);
+                                                                    //$value = $arrdate[0];
+                                                                    //$short = $arrdate[1];
+                                                                    //$code = $short[0];
+                                                                @endphp
+                                                                <span style="color: #283252 !important;font-weight: bold">{{ $updatedDate }}</span>
                                                             </div>
                                                             <div class="info-block-line  py-0">
-                                                                <h4 class="dark-inverted">iap ads</h4>
-                                                                <span class="dark-inverted" style="font-weight: bold">4.6</span>
+                                                                <h4 class="">Rating</h4>
+                                                                @php
+                                                                    $rating = $app['score'];
+                                                                    $whole = floor($rating);      // 1
+                                                                    $fraction = $rating - $whole; // .25
+
+                                                                    $fRating = (int) $rating + number_format($fraction, 1);
+
+
+                                                                    //
+                                                                    $stars = [];
+                                                                    for ($i = 0; $i < $whole; $i++) {
+                                                                        $stars[] = '<i class="lnir lnir-star"></i>';
+                                                                        if ($i == ($whole - 1) && $fraction > 0.25) {
+                                                                            $stars[] = '<i class="lnir lnir-star-half"></i>';
+                                                                        }
+                                                                    }
+
+                                                                @endphp
+
+                                                                @foreach($stars as $star){!! $star !!}@endforeach
+                                                                <span class="" style="color: #283252 !important;font-weight: bold">
+                                                                    {{ $fRating }}
+                                                                </span>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -3096,29 +3178,29 @@
                                     @endforeach
 
 
-{{--                                    <!--Infinite Loader-->--}}
-{{--                                        <div class="infinite-scroll-loader" data-filter-hide>--}}
-{{--                                            <div class="infinite-scroll-loader-inner">--}}
-{{--                                                <div class="loader is-loading"></div>--}}
-{{--                                                <div class="loader-end is-hidden">--}}
-{{--                                                    <span>No more items to load</span>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+                                    <!--Infinite Loader-->
+                                        <div class="infinite-scroll-loader" data-filter-hide  style="opacity: 1 !important;">
+                                            <div class="infinite-scroll-loader-inner">
+                                                <div class="loader is-loading"></div>
+                                                <div class="loader-end ">
+                                                    <span>&emsp; No more apps to load.</span>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                 </div>
 
 
 
-                            </div>
-                                <div id="load_more">
-                                    <button class="button h-button is-primary is-raised">
-                                            <span class="icon">
-                                              <i aria-hidden="true" class="fas fa-truck-loading"></i>
-                                            </span>
-                                        <span>Load More...</span>
-                                    </button>
-                                </div>
+{{--                            </div>--}}
+{{--                                <div id="load_more">--}}
+{{--                                    <button class="button h-button is-primary is-raised">--}}
+{{--                                            <span class="icon">--}}
+{{--                                              <i aria-hidden="true" class="fas fa-truck-loading"></i>--}}
+{{--                                            </span>--}}
+{{--                                        <span>Load More...</span>--}}
+{{--                                    </button>--}}
+{{--                                </div>--}}
 {{--                        here--}}
                         </div>
 
@@ -3278,7 +3360,372 @@
     <script src="assets/js/functions.js"></script>
     <script src="assets/js/main.js" async></script>
     <script src="assets/js/components.js" async></script>
-    <script src="assets/js/popover.js" async></script>
+{{--    <script src="assets/js/popover.js" async></script>--}}
+
+    <script async>
+        "use strict";
+
+
+
+        // function changeScreenshot(screenshotsNumber) {
+        //     var currentIndex = 0;
+        //     if (currentIndex < screenshotsNumber) {
+        //         currentIndex++;
+        //         document.getElementById("currentScreenshot").src = "";
+        //     }
+        //     // var backArrow = $("#backArrow");
+        //     //
+        //     // // on click on next arrow change the image of current shot
+        //     // $("#nextArrow").click(function () {
+        //     //     $("#currentScreenshot").attr("src", "");
+        //     // });
+        // }
+
+        $(document).ready(function () {
+
+
+
+            function initShotsPopovers() {
+                $("*[data-user-popover-screenshots]").each(function () {
+                    var e = $(this);
+                    var appRef = $(this).attr("data-user-popover-screenshots");
+                    var screenshotsNumber = $(this).attr("data-user-popover-screenshots-number");
+                    var screenshots = $(this).attr("data-user-popover-screenshots-list");
+
+                    console.log(screenshots);
+                    var nextArrowIcon = '<i class="lnir lnir-arrow-right"></i>';
+                    var backArrowIcon = '<i class="lnir lnir-arrow-left"></i>';
+
+                    e.webuiPopover({
+                        trigger: "hover",
+                        placement: "auto",
+                        width: 300,
+                        padding: false,
+                        offsetLeft: 0,
+                        offsetTop: 20,
+                        animation: "pop",
+                        style: "profile",
+                        cache: false,
+                        content: function () {
+                            var destroyLoader = setTimeout(function () {
+                                $(".loader-overlay").removeClass("is-active");
+                            }, 500);
+
+                            if (appRef != null) {
+                                var html = `
+                                    <div class="profile-popover-block">
+
+                                        <div class="loader-overlay is-active">
+                                            <div class="loader is-loading"></div>
+                                        </div>
+
+                                        <div class="profile-popover-wrapper">
+                                            <img class="avatar" src="${appRef}" width="100%" id="currentScreenshot">
+                                        </div>
+
+                                    </div>
+                                `;
+                            }
+                            return html;
+                            return destroyLoader;
+                        },
+                    });
+
+
+                    // $.ajax({
+                    //     url: "assets/data/user.json",
+                    //     dataType: "json",
+                    //     success: function (data) {
+                    //         e.webuiPopover({
+                    //             trigger: "hover",
+                    //             placement: "auto",
+                    //             width: 300,
+                    //             padding: false,
+                    //             offsetLeft: 0,
+                    //             offsetTop: 20,
+                    //             animation: "pop",
+                    //             style: "profile",
+                    //             cache: false,
+                    //             content: function () {
+                    //                 var destroyLoader = setTimeout(function () {
+                    //                     $(".loader-overlay").removeClass("is-active");
+                    //                 }, 500);
+                    //
+                    //                 if (data[userRef].pic != null) {
+                    //                     var html = `
+                    //                 <div class="profile-popover-block">
+                    //
+                    //                     <div class="loader-overlay is-active">
+                    //                         <div class="loader is-loading"></div>
+                    //                     </div>
+                    //
+                    //                     <div class="profile-popover-wrapper">
+                    //                         <div class="popover-avatar">
+                    //                             <img class="avatar" src="${data[userRef].pic}">
+                    //                             <img class="badge" src="${data[userRef].badge}">
+                    //                         </div>
+                    //                         <div class="popover-meta">
+                    //                             <span class="user-meta">
+                    //                                 <span class="username">${data[userRef].name}</span>
+                    //                                 <span class="location">${data[userRef].location}</span>
+                    //                             </span>
+                    //                             <span class="job-title">${data[userRef].position}</span>
+                    //                             <span class="bio">${data[userRef].bio}</span>
+                    //                         </div>
+                    //                     </div>
+                    //                     <div class="popover-actions">
+                    //                         <a class="popover-icon">
+                    //                             ${phoneIcon}
+                    //                         </a>
+                    //                         <a class="popover-icon">
+                    //                             ${mailIcon}
+                    //                         </a>
+                    //                         <a class="popover-icon">
+                    //                             ${profileIcon}
+                    //                         </a>
+                    //                     </div>
+                    //                 </div>
+                    //             `;
+                    //                 } else {
+                    //                     var classes = new Array(
+                    //                         "is-danger",
+                    //                         "is-info",
+                    //                         "is-primary",
+                    //                         "is-success",
+                    //                         "is-warning",
+                    //                         "is-h-purple",
+                    //                         "is-h-blue",
+                    //                         "is-h-green",
+                    //                         "is-h-orange",
+                    //                         "is-h-red",
+                    //                         "is-h-green"
+                    //                     );
+                    //                     var length = classes.length;
+                    //                     var randomClass = classes[Math.floor(Math.random() * length)];
+                    //
+                    //                     var html = `
+                    //
+                    //                 <div class="profile-popover-block">
+                    //
+                    //                     <div class="loader-overlay is-active">
+                    //                         <div class="loader is-loading"></div>
+                    //                     </div>
+                    //
+                    //                     <div class="profile-popover-wrapper">
+                    //                         <div class="popover-fake-avatar ${randomClass}">
+                    //                             <div class="fake-avatar">
+                    //                                 <span>${data[userRef].initials}</span>
+                    //                             </div>
+                    //                             <img class="badge" src="${data[userRef].badge}">
+                    //                         </div>
+                    //                         <div class="popover-meta">
+                    //                             <span class="user-meta">
+                    //                                 <span class="username">${data[userRef].name}</span>
+                    //                                 <span class="location">${data[userRef].location}</span>
+                    //                             </span>
+                    //                             <span class="job-title">${data[userRef].position}</span>
+                    //                             <span class="bio">${data[userRef].bio}</span>
+                    //                         </div>
+                    //                     </div>
+                    //                     <div class="popover-actions">
+                    //                         <a class="popover-icon">
+                    //                             ${phoneIcon}
+                    //                         </a>
+                    //                         <a class="popover-icon">
+                    //                             ${mailIcon}
+                    //                         </a>
+                    //                         <a class="popover-icon">
+                    //                             ${profileIcon}
+                    //                         </a>
+                    //                     </div>
+                    //
+                    //                 </div>
+                    //             `;
+                    //                 }
+                    //                 return html;
+                    //                 return destroyLoader;
+                    //             },
+                    //         });
+                    //     },
+                    // });
+                });
+            }
+
+            initShotsPopovers();
+
+
+
+
+            function initSummaryPopovers() {
+                $("*[data-user-popover-app-summary]").each(function () {
+                    var e = $(this);
+                    var appSummary = $(this).attr("data-user-popover-app-summary");
+
+                    e.webuiPopover({
+                        trigger: "hover",
+                        placement: "bottom",
+                        width: 300,
+                        padding: false,
+                        offsetLeft: 0,
+                        offsetTop: 20,
+                        animation: "pop",
+                        style: "profile",
+                        cache: false,
+                        content: function () {
+                            var destroyLoader = setTimeout(function () {
+                                $(".loader-overlay").removeClass("is-active");
+                            }, 500);
+
+                            if (appSummary != null) {
+                                var html = `
+                                    <div class="profile-popover-block">
+
+                                        <div class="loader-overlay is-active">
+                                            <div class="loader is-loading"></div>
+                                        </div>
+
+                                        <div class="profile-popover-wrapper">
+                                            <div class="popover-meta">
+                                                <span class="bio">${appSummary}</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                `;
+                            }
+                            return html;
+                            return destroyLoader;
+                        },
+                    });
+
+                    // $.ajax({
+                    //     url: "assets/data/user.json",
+                    //     dataType: "json",
+                    //     success: function (data) {
+                    //         e.webuiPopover({
+                    //             trigger: "hover",
+                    //             placement: "auto",
+                    //             width: 300,
+                    //             padding: false,
+                    //             offsetLeft: 0,
+                    //             offsetTop: 20,
+                    //             animation: "pop",
+                    //             style: "profile",
+                    //             cache: false,
+                    //             content: function () {
+                    //                 var destroyLoader = setTimeout(function () {
+                    //                     $(".loader-overlay").removeClass("is-active");
+                    //                 }, 500);
+                    //
+                    //                 if (data[userRef].pic != null) {
+                    //                     var html = `
+                    //                 <div class="profile-popover-block">
+                    //
+                    //                     <div class="loader-overlay is-active">
+                    //                         <div class="loader is-loading"></div>
+                    //                     </div>
+                    //
+                    //                     <div class="profile-popover-wrapper">
+                    //                         <div class="popover-avatar">
+                    //                             <img class="avatar" src="${data[userRef].pic}">
+                    //                             <img class="badge" src="${data[userRef].badge}">
+                    //                         </div>
+                    //                         <div class="popover-meta">
+                    //                             <span class="user-meta">
+                    //                                 <span class="username">${data[userRef].name}</span>
+                    //                                 <span class="location">${data[userRef].location}</span>
+                    //                             </span>
+                    //                             <span class="job-title">${data[userRef].position}</span>
+                    //                             <span class="bio">${data[userRef].bio}</span>
+                    //                         </div>
+                    //                     </div>
+                    //                     <div class="popover-actions">
+                    //                         <a class="popover-icon">
+                    //                             ${phoneIcon}
+                    //                         </a>
+                    //                         <a class="popover-icon">
+                    //                             ${mailIcon}
+                    //                         </a>
+                    //                         <a class="popover-icon">
+                    //                             ${profileIcon}
+                    //                         </a>
+                    //                     </div>
+                    //                 </div>
+                    //             `;
+                    //                 } else {
+                    //                     var classes = new Array(
+                    //                         "is-danger",
+                    //                         "is-info",
+                    //                         "is-primary",
+                    //                         "is-success",
+                    //                         "is-warning",
+                    //                         "is-h-purple",
+                    //                         "is-h-blue",
+                    //                         "is-h-green",
+                    //                         "is-h-orange",
+                    //                         "is-h-red",
+                    //                         "is-h-green"
+                    //                     );
+                    //                     var length = classes.length;
+                    //                     var randomClass = classes[Math.floor(Math.random() * length)];
+                    //
+                    //                     var html = `
+                    //
+                    //                 <div class="profile-popover-block">
+                    //
+                    //                     <div class="loader-overlay is-active">
+                    //                         <div class="loader is-loading"></div>
+                    //                     </div>
+                    //
+                    //                     <div class="profile-popover-wrapper">
+                    //                         <div class="popover-fake-avatar ${randomClass}">
+                    //                             <div class="fake-avatar">
+                    //                                 <span>${data[userRef].initials}</span>
+                    //                             </div>
+                    //                             <img class="badge" src="${data[userRef].badge}">
+                    //                         </div>
+                    //                         <div class="popover-meta">
+                    //                             <span class="user-meta">
+                    //                                 <span class="username">${data[userRef].name}</span>
+                    //                                 <span class="location">${data[userRef].location}</span>
+                    //                             </span>
+                    //                             <span class="job-title">${data[userRef].position}</span>
+                    //                             <span class="bio">${data[userRef].bio}</span>
+                    //                         </div>
+                    //                     </div>
+                    //                     <div class="popover-actions">
+                    //                         <a class="popover-icon">
+                    //                             ${phoneIcon}
+                    //                         </a>
+                    //                         <a class="popover-icon">
+                    //                             ${mailIcon}
+                    //                         </a>
+                    //                         <a class="popover-icon">
+                    //                             ${profileIcon}
+                    //                         </a>
+                    //                     </div>
+                    //
+                    //                 </div>
+                    //             `;
+                    //                 }
+                    //                 return html;
+                    //                 return destroyLoader;
+                    //             },
+                    //         });
+                    //     },
+                    // });
+                });
+            }
+
+            initSummaryPopovers();
+
+
+
+        });
+
+
+
+    </script>
     <script src="assets/js/widgets.js" async></script>
 
 

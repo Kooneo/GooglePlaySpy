@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
         "nelexa/google-play-scraper": "^0.3.2",
+        "predis/predis": "^1.1",
         "symfony/cache": "^6.0"
     },
     "require-dev": {

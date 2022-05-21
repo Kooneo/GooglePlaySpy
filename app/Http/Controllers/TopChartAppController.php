@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Singleton\GplaySingleton;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
+use Redis as MRedis;
 use Livewire\Livewire;
 use Nelexa\GPlay\Enum\AgeEnum;
 use Nelexa\GPlay\Enum\CategoryEnum;
@@ -29,6 +31,8 @@ class TopChartAppController extends Controller
         $gplay = GplaySingleton::getInstance()->gplay;
 
 
+        $redis = Redis::connection();
+
 //        $cache = new \Symfony\Component\Cache\Psr16Cache(
 //            new \Symfony\Component\Cache\Adapter\FilesystemAdapter()
 //        );
@@ -37,55 +41,67 @@ class TopChartAppController extends Controller
 //        $gplay->setCacheTtl(\DateInterval::createFromDateString('1 hour'));
 //        $gplay->setConcurrency(8);
 //
-        $apps = $gplay->getTopApps(
-            $category = \Nelexa\GPlay\Enum\CategoryEnum::GAME_CASUAL(),
-            $ageLimit = \Nelexa\GPlay\Enum\AgeEnum::FIVE_UNDER(),
-            50
-        );
 
+        // --------------------------------------------------
 
+//        $category = CategoryEnum::GAME();
 
         $appIds = [];
 
         $appslist = [];
 
-        foreach ($apps as $app) {
-            array_push($appIds, $app->getId());
-        }
+        if (!$redis->exists("top_apps:GAME") || $redis->get("top_apps:GAME") == null) {
+            $topApps = $gplay->getTopApps(
+                $category = \Nelexa\GPlay\Enum\CategoryEnum::GAME(),
+                $ageLimit = \Nelexa\GPlay\Enum\AgeEnum::FIVE_UNDER(),
+                GPlayApps::UNLIMIT
+            );
 
-        $newApps = $gplay->getAppsInfo($appIds);
+            $redis->set("top_apps:GAME", json_encode($topApps));
+            foreach ($topApps as $app) {
+                array_push($appIds, $app->getId());
+            }
 
+        } else {
+            $topApps = json_decode($redis->get("top_apps:GAME"), true);
 
-        if (is_array($newApps)) {
-            foreach ($newApps as $app) {
-                array_push($appslist, $app);
+            foreach ($topApps as $app) {
+                array_push($appIds, $app['id']);
             }
         }
+//
+        foreach ($appIds as $appId) {
+            if (!$redis->exists("top_apps_fulld:GAME:{$appId}")) {
+                $appinfo = $gplay->getAppInfo($appId);
+                if ($appinfo != null) {
+                    $redis->set("top_apps_fulld:GAME:{$appId}", json_encode($appinfo));
+                    array_push($appslist, $appinfo);
+                }
 
-        $this->appslist = $appslist;
-//
-//        foreach ($appIds as $appId) {
-//            $app = $gplay->getAppInfo($appId);
-//            array_push($appslist, $app);
+            } else {
+                $appinfo = json_decode( $redis->get("top_apps_fulld:GAME:{$appId}"), true);
+                if ($appinfo != null) {
+                    array_push($appslist, $appinfo);
+                }
+//                array_push($appslist, $appinfo);
+            }
+        }
+//        } else {
+//            $appslist = json_decode($redis->get("top_apps_fulld:GAME"), true);
 //        }
-
-//        dd($apps);
-//
-//        $appslist1 = [];
-//
-//
-//
-//        foreach ($apps as $app) {
-//            array_push($appslist1, $app->getId());
-//        }
-//
-//        $chunks = array_chunk($appslist1, 100);
-////        dd($chunks);
-//        $appslist = $this->appslist;
 //
         set_time_limit(0);
-        $categories = $gplay->getCategories();
+
 //        dd($appslist);
+
+
+        if (!$redis->exists('categories') && $redis->get('categories') == null) {
+            $categories = $gplay->getCategories();
+            $redis->set('categories', json_encode($categories));
+        } else {
+            $categories = json_decode($redis->get('categories'), true);
+        }
+//        dd($appslist[106]);
         return view('frontend.top-app', compact('categories', 'appslist'));
     }
 
@@ -138,9 +154,12 @@ class TopChartAppController extends Controller
 
 
 
+
         //        return response()->json([
 ////            'html' => view('frontend.top-app-item', compact('appslist'))->render(),
 //            'next_page' => "djdj"
 //        ]);
     }
+
+
 }
