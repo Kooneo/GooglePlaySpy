@@ -2913,11 +2913,11 @@
                                         </div>
                                         <div class="select-drop has-slimscroll-sm">
                                             <div class="drop-inner">
-                                                @foreach($categories as $category)
+                                                @foreach($categories as $key => $category)
                                                     <div class="option-row">
                                                         <input type="radio" name="grid_filter">
                                                         <div class="option-meta">
-                                                            <span>{{ is_array($category) ? $category["name"] : $category->getName()}}</span>
+                                                            <span>{{ $category }}</span>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -3006,7 +3006,7 @@
                                                     <div class="card-block">
                                                         <div class="card-block-inner is-dark-bordered-12 py-1 ">
                                                             <div class="h-avatar is-large" style="width: 100%;max-width: inherit">
-                                                                <a href="{{ is_array( $app ) ? $app['url'] : $app->getUrl() }}" target="_blank" data-user-popover-screenshots-number="{{ count($app['screenshots']) }}" data-user-popover-screenshots="{{ is_array( $app ) ? $app['screenshots'][0] :  $app->getIcon() . '=s180' }}" data-target="webuiPopover{{ $loop->iteration }}">
+{{--                                                                <a href="{{ is_array( $app ) ? $app['url'] : $app->getUrl() }}" target="_blank" data-user-popover-screenshots-number="{{ count($app['screenshots']) }}" data-user-popover-screenshots="{{ is_array( $app ) ? $app['screenshots'][0] :  $app->getIcon() . '=s180' }}" data-target="webuiPopover{{ $loop->iteration }}">--}}
 
                                                                     <img src="{{ is_array( $app ) ? $app['icon'] . '=s180' :  $app->getIcon() . '=s180' }}" class="avatar is-squared" style="width: 100%;height: 100%">
                                                                 </a>
@@ -3104,16 +3104,36 @@
                                                                         $date = $app->getReleased()->date;
                                                                     }
                                                                     $relasedate = \Illuminate\Support\Carbon::createFromTimeString($date)->diffForHumans();
-/*
+
                                                                     $arrdate = explode(' ',$relasedate);
                                                                     $value = $arrdate[0];
                                                                     $short = $arrdate[1];
                                                                     $code = $short[0];
-*/
+
                                                                 @endphp
-                                                                <span style="color: #283252 !important;font-weight: bold">{{ $relasedate }}</span>
+                                                                <span style="color: #283252 !important;font-weight: bold">{{  $value . " " . $code }}</span>
                                                             </div>
 
+
+                                                            <div class="info-block-line py-0">
+                                                                <h4 class="">Updated </h4>
+                                                                @php
+
+                                                                    if (is_array($app)) {
+                                                                        $updated_date = $app['updated'];
+                                                                    } else {
+                                                                        $updated_date = $app->getUpdated()->date;
+                                                                    }
+                                                                    $updatedDate = \Illuminate\Support\Carbon::createFromTimeString($updated_date)->diffForHumans();
+/*
+                                                                    $arrUpdatedDate = explode(' ',$updatedDate);
+                                                                    $val = $arrUpdatedDate[0];
+                                                                    $short = $arrUpdatedDate[1];
+                                                                    $code = $short[0];
+*/
+                                                                @endphp
+                                                                <span style="color: #283252 !important;font-weight: bold">{{  $updatedDate }}</span>
+                                                            </div>
                                                             <div class="info-block-line py-0">
                                                                 <h4 class="">{!! $app["price"] == 0 ? '<i aria-hidden="true" class="fas fa-circle text-success"></i> Free' : '<i aria-hidden="true" class="fas fa-circle text-danger"></i> ' . "{$app["priceText"]}"  !!} </h4>
                                                                 <h4 class="">{!! $app["containsAds"] == true ? '<i aria-hidden="true" class="fas fa-circle text-success"></i> ' : '<i aria-hidden="true" class="fas fa-circle text-danger"></i> ' !!} Ads</h4>
@@ -3122,30 +3142,13 @@
                                                             @if($app["offersIAP"] )
                                                                 <div class="info-block-line py-0">
                                                                     <h4 class=""><i aria-hidden="true" class="fas fa-circle text-success"></i> IAP</h4>
-{{--                                                                    @if($app["offersIAP"])--}}
-{{--                                                                        <span style="color: #283252 !important;font-weight: bold">{{ $app['offersIAPCost'] }}</span>--}}
-{{--                                                                    @endif--}}
+                                                                    {{--                                                                    @if($app["offersIAP"])--}}
+                                                                    {{--                                                                        <span style="color: #283252 !important;font-weight: bold">{{ $app['offersIAPCost'] }}</span>--}}
+                                                                    {{--                                                                    @endif--}}
                                                                 </div>
                                                             @endif
-                                                            <div class="info-block-line py-0">
-                                                                <h4 class="">Updated </h4>
-                                                                @php
-
-                                                                    if (is_array($app)) {
-                                                                        $date = $app['updated'];
-                                                                    } else {
-                                                                        $date = $app->getUpdated()->date;
-                                                                    }
-                                                                    $updatedDate = \Illuminate\Support\Carbon::createFromTimeString($date)->diffForHumans();
-                                                                    //$arrdate = explode(' ',$relasedate);
-                                                                    //$value = $arrdate[0];
-                                                                    //$short = $arrdate[1];
-                                                                    //$code = $short[0];
-                                                                @endphp
-                                                                <span style="color: #283252 !important;font-weight: bold">{{ $updatedDate }}</span>
-                                                            </div>
                                                             <div class="info-block-line  py-0">
-                                                                <h4 class="">Rating</h4>
+{{--                                                                <h4 class="">Rating </h4>--}}
                                                                 @php
                                                                     $rating = $app['score'];
                                                                     $whole = floor($rating);      // 1
@@ -3166,7 +3169,7 @@
                                                                 @endphp
 
                                                                 @foreach($stars as $star){!! $star !!}@endforeach
-                                                                <span class="" style="color: #283252 !important;font-weight: bold">
+                                                                <span class="" style="color: #283252 !important;font-weight: bold; font-size: 0.9rem;">
                                                                     {{ $fRating }}
                                                                 </span>
 

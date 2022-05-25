@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Jobs\loadTopApps;
-use App\Singleton\GplaySingleton;
+use App\Singletons\GplaySingleton;
 use Livewire\Component;
 use Nelexa\GPlay\GPlayApps;
 

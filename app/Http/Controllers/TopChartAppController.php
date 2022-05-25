@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Singleton\GplaySingleton;
+use App\Repositories\GPlayRepository;
+use App\Singletons\GplaySingleton;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Redis as MRedis;
@@ -15,93 +16,13 @@ use Nelexa\GPlay\Model\ClusterPage;
 class TopChartAppController extends Controller
 {
 
-    public $appslist;
-
-
-    public function index()
+    public function index(GPlayRepository $gplayRepository)
     {
-//        $gplay = new \Nelexa\GPlay\GPlayApps($defaultLocale = 'en_US', $defaultCountry = 'us');
-////        $appslist = $gplay->getListApps(CategoryEnum::GAME(), AgeEnum::FIVE_UNDER(), "10" );
-//
-//        $clusterPage = 'https://play.google.com/store/apps/collection/cluster?clp=0g4jCiEKG3RvcHNlbGxpbmdfZnJlZV9BUFBMSUNBVElPThAHGAM%3D:S:ANO1ljKs-KA&gsr=CibSDiMKIQobdG9wc2VsbGluZ19mcmVlX0FQUExJQ0FUSU9OEAcYAw%3D%3D:S:ANO1ljL40zU&hl=en';
-////        $appslist = $gplay->getListApps();
-//
-////        dd($appslist);
-
-        $gplay = GplaySingleton::getInstance()->gplay;
-
-
-        $redis = Redis::connection();
-
-//        $cache = new \Symfony\Component\Cache\Psr16Cache(
-//            new \Symfony\Component\Cache\Adapter\FilesystemAdapter()
-//        );
-//        $gplay->setCache($cache, \DateInterval::createFromDateString('1 hour'));
-//
-//        $gplay->setCacheTtl(\DateInterval::createFromDateString('1 hour'));
-//        $gplay->setConcurrency(8);
-//
-
-        // --------------------------------------------------
-
-//        $category = CategoryEnum::GAME();
-
-        $appIds = [];
-
-        $appslist = [];
-
-        if (!$redis->exists("top_apps:GAME") || $redis->get("top_apps:GAME") == null) {
-            $topApps = $gplay->getTopApps(
-                $category = \Nelexa\GPlay\Enum\CategoryEnum::GAME(),
-                $ageLimit = \Nelexa\GPlay\Enum\AgeEnum::FIVE_UNDER(),
-                GPlayApps::UNLIMIT
-            );
-
-            $redis->set("top_apps:GAME", json_encode($topApps));
-            foreach ($topApps as $app) {
-                array_push($appIds, $app->getId());
-            }
-
-        } else {
-            $topApps = json_decode($redis->get("top_apps:GAME"), true);
-
-            foreach ($topApps as $app) {
-                array_push($appIds, $app['id']);
-            }
-        }
-//
-        foreach ($appIds as $appId) {
-            if (!$redis->exists("top_apps_fulld:GAME:{$appId}")) {
-                $appinfo = $gplay->getAppInfo($appId);
-                if ($appinfo != null) {
-                    $redis->set("top_apps_fulld:GAME:{$appId}", json_encode($appinfo));
-                    array_push($appslist, $appinfo);
-                }
-
-            } else {
-                $appinfo = json_decode( $redis->get("top_apps_fulld:GAME:{$appId}"), true);
-                if ($appinfo != null) {
-                    array_push($appslist, $appinfo);
-                }
-//                array_push($appslist, $appinfo);
-            }
-        }
-//        } else {
-//            $appslist = json_decode($redis->get("top_apps_fulld:GAME"), true);
-//        }
-//
         set_time_limit(0);
-
-//        dd($appslist);
-
-
-        if (!$redis->exists('categories') && $redis->get('categories') == null) {
-            $categories = $gplay->getCategories();
-            $redis->set('categories', json_encode($categories));
-        } else {
-            $categories = json_decode($redis->get('categories'), true);
-        }
-//        dd($appslist[106]);
+        $appslist = $gplayRepository->getTopAppsInCategory(category: CategoryEnum::GAME(), ageLimit: AgeEnum::FIVE_UNDER(), numOfApps: 10);
+        dd($appslist);
+        // get categories
+        $categories = $gplayRepository->getCategories();
         return view('frontend.top-app', compact('categories', 'appslist'));
     }
 

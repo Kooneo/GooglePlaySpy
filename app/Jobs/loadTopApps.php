@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Http\Controllers\TopChartAppController;
-use App\Singleton\GplaySingleton;
+use App\Singletons\GplaySingleton;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
